@@ -1,43 +1,299 @@
-# Lesson Title
-
-All Readmes should follow a similar format when it comes to structure. Please
-refer to the [style guide][] for a detailed explaination of standards.
+# Nested Data Structures: Printing and Coalescing Data
 
 ## Learning Goals
 
-- [Check out this Readme on writing Learning Goals][goals]
+* Display the cells in an `Array` of `Array`s
+* Traverse `Array` of `Array`s to produce a single value
+* Traverse `Array` of `Array`s to produce a new nested data structure
 
 ## Introduction
 
-Sometimes called an Overview, this section should contain a brief summary of
-what the lesson contains. Great introductions present a problem that is solved
-by the concepts reviewed in this lesson.
+When we started this module, we mentioned that we often use nested data
+structures as a "base" from which to do data processing. `Array`s of `Array`s
+is our first milestone in learning to work with nested data.
 
-## Contents
+In the next few labs, we're going to pick out three specific types of
+processing to practice:
 
-Lessons often contain multiple sections of content. Use the Learning Goals
-you've defined to guide you on what sections and sub-sections are needed.
+1. Displaying the nested structure
+2. Transforming the nested structure into a new structure (a collection)
+3. Transforming the nested structure into a result (a single thing, usually a number)
 
-Refer to [this guide for assistance when writing Readmes][readmes]
+In all three examples, we will use loops to traverse the entire data structure.
+
+## Review Looping Through Arrays
+
+In previous lessons, we looked at how to traverse an array using a `while` loop.
+Let's look at a few examples. Most of the examples used a variable that would
+increment every time the loop code executed:
+
+```rb
+array = ["a", "b", "c", "d"]
+
+count = 0
+
+while count < array.length do
+  # code to work on the array would go here
+  count += 1
+end
+```
+
+If we wanted to output every element:
+
+```rb
+array = [100, 300, 50, 450]
+count = 0
+
+while count < array.length do
+  puts array[count]
+  count += 1
+end
+```
+
+Any simple array can be displayed using this method.
+
+If we wanted to _modify_ each element, we would change `puts array[count]`. Say, for
+instance, we want to perform some math operation on each element:
+
+```rb
+array = [100, 300, 50, 450]
+count = 0
+
+while count < array.length do
+  array[count] = array[count] * array[count]
+  count += 1
+end
+
+array
+ # => [10000, 90000, 2500, 202500]
+```
+
+This would alter each element in the original array, replacing each value with
+the square of itself. If we didn't want to modify the original, we can collect the
+result of each operation in a new array:
+
+```rb
+array = [100, 300, 50, 450]
+results_array = []
+count = 0
+
+while count < array.length do
+  results_array << array[count] * array[count]
+  count += 1
+end
+
+results_array
+ # => [10000, 90000, 2500, 202500]
+```
+
+Here, `array` is kept as is, but the square of each of its elements is added to
+`results_array`.
+
+Finally, if we wanted to derive a single value from an array of elements, we
+modify a variable on each loop rather than adding to a new collection. If we
+wanted to sum our array values:
+
+```rb
+array = [100, 300, 50, 450]
+sum = 0
+count = 0
+
+while count < array.length do
+  sum = sum + array[count]
+  count += 1
+end
+
+sum
+ # => 900
+```
+
+We've _reduced_ the array down to a single value.
+
+## Looping Through Nested Arrays
+
+In an `Array` of `Array`s data structurer, we can still use the `while` loop,
+but we use it _twice_. Consider this example:
+
+```rb
+array_of_arrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+```
+
+First, we will start with a single loop:
+
+```rb
+count = 0
+
+while count < array_of_arrays.length do
+  p array_of_arrays[count]
+  count += 1
+end
+```
+
+The above code will output each nested array:
+
+```rb
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+```
+
+> **Note:** Using `p` will display each array, but `puts` will output all the
+> values inside those arrays in order!  We use `p` here to make the output a
+> little clearer.
+
+With a single loop like this, we can access each of the nested arrays. To work
+with the contents of each of these arrays, we use a second loop:
+
+```rb
+count = 0
+
+while count < array_of_arrays.length do
+  p array_of_arrays[count]
+
+  inner_count = 0
+  while inner_count < array_of_arrays[count].length do
+    p array_of_arrays[count][inner_count]
+    inner_count += 1
+  end
+
+  count += 1
+end
+```
+
+Notice we've left in the original `p` statement to show each outer loop. This
+code outputs:
+
+```sh
+[1, 2, 3]
+1
+2
+3
+[4, 5, 6]
+4
+5
+6
+[7, 8, 9]
+7
+8
+9
+```
+
+Take a moment to try and visualize what is happening. Every time the outer
+`while` loop executes, the inner `while` loop executes three times. Stepping
+through one loop:
+
+* the outer `while` loop executes because `count` is less than the length
+  of `array_of_ararys`
+* `p array_of_arrays[count]` is called, which prints the entire first nested array
+* `inner_count` is assigned to `0`
+* the inner `while` loop executes because `inner_count` is less than the length
+  of the **first** nested array, `array_of_ararys[count]`
+  * `p array_of_arrays[count][inner_count]` is called, printing the _first_ value
+    of the first nested array because `count` is `0` and `inner_count` is `0`
+  * `inner_count` is incremented and now equals `1`
+* the inner `while` loop executes because `inner_count` is less than the length
+  of the **first** nested array, `array_of_ararys[count]`
+  * `p array_of_arrays[count][inner_count]` is called, printing the _second_ value
+    of the first nested array because `count` is still `0` and `inner_count` is `1`
+  * `inner_count` is incremented and now equals `2`
+* the inner `while` loop executes because `inner_count` is less than the length
+  of the **first** nested array, `array_of_ararys[count]`
+  * `p array_of_arrays[count][inner_count]` is called, printing the _third_ value
+    of the first nested array because `count` is still `0` and `inner_count` is `2`
+  * `inner_count` is incremented and now equals `3`
+* the inner `while` loop does not execute because `inner_count` is now equal to
+  the length of the first nested array
+* `count` is incremented and now equals `1`
+
+This process happens two more times, looping through the second and third nested
+arrays.
+
+## Mapping Nested Arrays
+
+We displayed nested content, now lets try to collect it. Given the same array of
+arrays:
+
+```rb
+array_of_arrays = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+```
+
+What if we wanted to collect all the values of each nested array into a single
+array?
+
+First, we create a variable, `results_array`, the new array we want. Then, we
+build two `while` loops again. Instead of outputting each element in each
+nested array, we'll just push it into the `results_array`.
+
+```rb
+count = 0
+results_array = [] # new array
+
+while count < array_of_arrays.length do
+
+  inner_count = 0
+  while inner_count < array_of_arrays[count].length do
+    results_array << array_of_arrays[count][inner_count] # pushes every element into an array
+    inner_count += 1
+  end
+
+  count += 1
+end
+
+results_array
+ # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+Take a moment to again think on how this code executes step by step.
+
+## Reducing Values in Nested Arrays
+
+In a similar fashion to mapping over an array, reducing requires a variable to
+contain an accumulated result. If we wanted the sum of all of these nested
+values, we would replace the array from last time with an integer:
+
+```rb
+count = 0
+sum = 0
+
+while count < array_of_arrays.length do
+
+  inner_count = 0
+  while inner_count < array_of_arrays[count].length do
+    sum = sum + array_of_arrays[count][inner_count] # adds the element's value to sum and sets sum
+    inner_count += 1
+  end
+
+  count += 1
+end
+
+sum
+ # => 45
+```
+
+In this example, like the others, we access the values inside a nested array
+using chained brackets, `[count]` and `[inner_count]`.
 
 ## Conclusion
 
-Wrap up the lesson with a brief review of what was covered. This is often a good
-place to connect the concepts discussed within a larger context.
+Using two `while` loops we were able to display, collect and reduce a set of
+nested arrays. The exact design of the loops required for this sort of task is
+dependent on the data structure you are working with. An `Array` of `Array` of
+`Array`s, for instance, would need _three_ loops.
 
-## Resources
+The key takeway here, though, is that we can draw out information we want from
+data structures by iterating over them with basic loops. This sort of task is so
+common, Ruby has built-in methods to handle the work like [`each`][], [`map`][],
+and [`sum`][] that we can apply directly to arrays. We will learn these methods
+soon, but remember that at their cores, they are all based on simple loops.
 
-This is an optional section, but list and link to resources, articles, and
-websites that you think will be beneficial for additional reading. Also, if your
-written contents included external links, it may be good to add a second
-reference here:
-
-- [Style Guide][style guide]
-- [Writing Learning Goals][goals]
-- [Writing Readmes][readmes]
-
-[style guide]: https://github.com/learn-co-curriculum/curriculum-team/blob/master/writing/style_guide.md
-[goals]: https://github.com/learn-co-curriculum/curriculum-team/blob/master/writing/creation-content-focus-learning_objectives.md
-[readmes]: https://github.com/learn-co-curriculum/curriculum-team/blob/master/writing/creation-content-focus-writing_readme.md
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/readme-template' title='Readme Template.'>Readme Template.</p>
+[`each`]: https://ruby-doc.org/core-2.5.0/Array.html#method-i-each
+[`map`]: https://ruby-doc.org/core-2.5.0/Array.html#method-i-map
+[`sum`]: https://ruby-doc.org/core-2.5.0/Array.html#method-i-sum
