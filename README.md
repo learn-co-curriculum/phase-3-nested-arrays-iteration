@@ -68,9 +68,9 @@ array
  # => [10000, 90000, 2500, 202500]
 ```
 
-This would alter each element in the original array, replacing each value with
-the square of itself. If we didn't want to modify the original, we can collect the
-result of each operation in a new array:
+The code above alters each element in the original array, replacing each
+value with the square of itself. If we didn't want to modify the original, we
+can collect the result of each operation in a new array:
 
 ```rb
 array = [100, 300, 50, 450]
@@ -214,7 +214,7 @@ arrays.
 
 ## Mapping Nested Arrays
 
-We displayed nested content, now lets try to collect it. Given the same array of
+We displayed nested content, now let's try to collect it. Given the same array of
 arrays:
 
 ```rb
@@ -251,7 +251,7 @@ results_array
  # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-Take a moment to again think on how this code executes step by step.
+Take a moment to think on how this code executes step by step again.
 
 ## Reducing Values in Nested Arrays
 
@@ -288,11 +288,12 @@ nested arrays. The exact design of the loops required for this sort of task is
 dependent on the data structure you are working with. An `Array` of `Array` of
 `Array`s, for instance, would need _three_ loops.
 
-The key takeway here, though, is that we can draw out information we want from
-data structures by iterating over them with basic loops. This sort of task is so
-common, Ruby has built-in methods to handle the work like [`each`][], [`map`][],
-and [`sum`][] that we can apply directly to arrays. We will learn these methods
-soon, but remember that at their cores, they are all based on simple loops.
+The critical takaeway here, though, is that we can draw out information we want
+from data structures by iterating over them with basic loops. This sort of task
+is so common that Ruby has built-in methods to handle the work like [`each`][],
+[`map`][], and [`sum`][] that we can apply directly to arrays. We will learn
+these methods soon, but remember that at their cores, they are all based on
+simple loops.
 
 [`each`]: https://ruby-doc.org/core-2.5.0/Array.html#method-i-each
 [`map`]: https://ruby-doc.org/core-2.5.0/Array.html#method-i-map
