@@ -111,8 +111,7 @@ We've _reduced_ the array down to a single value.
 
 ## Looping Through Nested Arrays
 
-In an `Array` of `Array`s data structurer, we can still use the `while` loop,
-but we use it _twice_. Consider this example:
+Consider the following array of arrays:
 
 ```rb
 array_of_arrays = [
@@ -122,7 +121,46 @@ array_of_arrays = [
 ]
 ```
 
-First, we will start with a single loop:
+If we wanted to print out each nested array manually, we would write:
+
+```rb
+array_of_arrays[0]
+ # => [1, 2, 3]
+array_of_arrays[1]
+ # => [4, 5, 6]
+array_of_arrays[2]
+ # => [7, 8, 9]
+```
+
+If we wanted to print the elements in each array, we could add a second set of brackets:
+
+```rb
+array_of_arrays[0][0]
+ # => 1
+array_of_arrays[0][1]
+ # => 2
+array_of_arrays[0][2]
+ # => 3
+array_of_arrays[1][0]
+ # => 4
+array_of_arrays[1][1]
+ # => 5
+array_of_arrays[1][2]
+ # => 6
+array_of_arrays[2][0]
+ # => 7
+array_of_arrays[2][2]
+ # => 8
+array_of_arrays[2][3]
+ # => 9
+```
+
+While this works fine, it requires specific, concrete code. If one of these
+arrays was had more or less than 3 elements, we would have to change our code to
+account for it. Using `while` loops solves this.
+
+When looping through an `Array` of `Array`s data structure, we add a second
+`while` loop. First, we start with a single loop:
 
 ```rb
 count = 0
@@ -142,11 +180,27 @@ The above code will output each nested array:
 ```
 
 > **Note:** Using `p` will display each array, but `puts` will output all the
-> values inside those arrays in order!  We use `p` here to make the output a
-> little clearer.
+> values inside those arrays!  We use `p` here to make the output a little
+> clearer.
 
-With a single loop like this, we can access each of the nested arrays. To work
-with the contents of each of these arrays, we use a second loop:
+With a single loop like this, we can access each of the nested arrays. At this
+point, we _could_ create a sort of hybrid between looping and directly accessing
+values:
+
+```rb
+count = 0
+
+while count < array_of_arrays.length do
+  p array_of_arrays[count][0]
+  p array_of_arrays[count][1]
+  p array_of_arrays[count][2]
+  count += 1
+end
+```
+
+This prints out each value from each nested array, but still requires specific
+code - `0`, `1`, and `2`, the exact indices of the array elements. Instead, we
+can use a second `while` loop:
 
 ```rb
 count = 0
