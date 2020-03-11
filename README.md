@@ -156,7 +156,7 @@ array_of_arrays[2][3]
 ```
 
 While this works fine, it requires specific, concrete code. If one of these
-arrays was had more or less than 3 elements, we would have to change our code to
+arrays had more or less than three elements, we would have to change our code to
 account for it. Using `while` loops solves this.
 
 When looping through an `Array` of `Array`s data structure, we add a second
@@ -237,7 +237,7 @@ code outputs:
 ```
 
 Take a moment to try and visualize what is happening. Every time the outer
-`while` loop executes, the inner `while` loop executes three times. Stepping
+`while` loop executes, the inner `while` loop runs three times. Stepping
 through one loop:
 
 * the outer `while` loop executes because `count` is less than the length
@@ -305,7 +305,7 @@ results_array
  # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-Take a moment to think on how this code executes step by step again.
+Take a moment to think about how this code executes step by step again.
 
 ## Reducing Values in Nested Arrays
 
@@ -337,12 +337,12 @@ using chained brackets, `[count]` and `[inner_count]`.
 
 ## Conclusion
 
-Using two `while` loops we were able to display, collect and reduce a set of
+Using two `while` loops, we were able to display, collect, and reduce a set of
 nested arrays. The exact design of the loops required for this sort of task is
 dependent on the data structure you are working with. An `Array` of `Array` of
 `Array`s, for instance, would need _three_ loops.
 
-The critical takaeway here, though, is that we can draw out information we want
+The critical takeaway here, though, is that we can draw out the information we want
 from data structures by iterating over them with basic loops. This sort of task
 is so common that Ruby has built-in methods to handle the work like [`each`][],
 [`map`][], and [`sum`][] that we can apply directly to arrays. We will learn
