@@ -241,21 +241,21 @@ Take a moment to try and visualize what is happening. Every time the outer
 through one loop:
 
 * the outer `while` loop executes because `count` is less than the length
-  of `array_of_ararys`
+  of `array_of_arrays`
 * `p array_of_arrays[count]` is called, which prints the entire first nested array
 * `inner_count` is assigned to `0`
 * the inner `while` loop executes because `inner_count` is less than the length
-  of the **first** nested array, `array_of_ararys[count]`
+  of the **first** nested array, `array_of_arrays[count]`
   * `p array_of_arrays[count][inner_count]` is called, printing the _first_ value
     of the first nested array because `count` is `0` and `inner_count` is `0`
   * `inner_count` is incremented and now equals `1`
 * the inner `while` loop executes because `inner_count` is less than the length
-  of the **first** nested array, `array_of_ararys[count]`
+  of the **first** nested array, `array_of_arrays[count]`
   * `p array_of_arrays[count][inner_count]` is called, printing the _second_ value
     of the first nested array because `count` is still `0` and `inner_count` is `1`
   * `inner_count` is incremented and now equals `2`
 * the inner `while` loop executes because `inner_count` is less than the length
-  of the **first** nested array, `array_of_ararys[count]`
+  of the **first** nested array, `array_of_arrays[count]`
   * `p array_of_arrays[count][inner_count]` is called, printing the _third_ value
     of the first nested array because `count` is still `0` and `inner_count` is `2`
   * `inner_count` is incremented and now equals `3`
