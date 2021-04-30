@@ -1,4 +1,4 @@
-# Nested Data Structures: Printing and Coalescing Data
+# Iterating Through Nested Arrays
 
 ## Learning Goals
 
